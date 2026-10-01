@@ -7,14 +7,25 @@
 
 ---
 
+## 下载
+
+**[→ 下载最新安装包（Releases）](https://github.com/lsl1931/douyin-account-hub/releases/latest)**
+
+Windows x64，约 106 MB。**目标机器不需要安装 Node.js 或 npm。**
+
+> ⚠️ 安装包没有代码签名，首次运行 Windows 可能弹 SmartScreen 提示，
+> 点「更多信息」→「仍要运行」即可。
+
+---
+
 ## 快速开始
 
-**方式一：装到别的电脑**（推荐，不需要 Node / npm）
+**方式一：装到别的电脑**（推荐）
 
-把 `release\DouyinAccountHub-Setup-0.1.0.exe` 拷过去双击即可。装完桌面和开始菜单都会有
-「抖音账号面板」。
+下载上面的 `DouyinAccountHub-Setup-<版本>.exe`，拷过去双击安装。装完桌面和开始菜单都会有
+「抖音账号面板」，也会出现在 Windows「设置 → 应用」里。
 
-**方式二：在这台机器上从源码装**
+**方式二：从源码装**
 
 | 步骤 | 操作 |
 |---|---|
@@ -23,7 +34,11 @@
 
 `install.cmd` 会自动建好桌面快捷方式，并注册到 Windows「设置 → 应用」。
 
+想要自己打安装包：`npm run pack`，产物在 `release\` 下。
+
 ## 图标
+
+![应用图标](build/icon-512.png)
 
 `build/icon.ico`（含 16/24/32/48/64/128/256 全部尺寸）。语义是**多账号 + 视频**：
 两张错开的白色卡片代表多个账号窗口，前卡片里的播放三角代表视频。
