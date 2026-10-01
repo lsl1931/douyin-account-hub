@@ -92,3 +92,45 @@
 - 由用户在真实抖音账号上完成扫码 -> 关窗口 -> 重开面板 -> 免扫码进入（AC6）
 - 下一阶段：自动发布（选视频 -> 每账号独立文案 -> 提交）
 - 可选：给安装包做代码签名，消除其他设备首次运行时的 SmartScreen 提示
+
+
+## Session 3: 推送到 GitHub 并发布 v0.1.0 Release
+<!-- trellis-session: v=2 fp=2e88fd3961b7d3cb -->
+
+**Date**: 2026-10-01
+**Task**: 推送到 GitHub 并发布 v0.1.0 Release
+**Branch**: `main`
+
+### Summary
+
+初始化 git 仓库、创建公开仓库 lsl1931/douyin-account-hub、推送全部代码，并把 106 MB 的 NSIS 安装包作为 Release 资产发布。
+
+### Main Changes
+
+- git init -b main，身份用 gh 账号的 noreply 邮箱（本机未配置全局 git 身份）
+- 推送前扫描：无 token/私钥/密码命中，无 C:\Users\<用户名> 绝对路径泄露
+- 确认 node_modules / dist / release / 两个缓存目录均未进入版本库（164 个文件，1.5 MB）
+- 安装包 106 MB 超过 GitHub 单文件 100 MB 硬限制，因此放 release/ + gitignore，改由 Release 资产分发
+- README 修正：原来让读者去本地找 release\\*.exe（克隆后根本不存在），改为指向 Releases 页
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `38a2b4b` | feat: 抖音多账号入口面板 |
+| `4618a07` | docs: README 增加 Releases 下载入口与图标预览 |
+
+### Testing
+
+- [OK] 匿名 HEAD 请求 Release 资产 -> 200，Content-Length 106.16 MB，确认公开可下载
+- [OK] gh api 校验远端：2 个提交、仓库 visibility=PUBLIC、中文描述已生效
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- 由用户在真实抖音账号上完成扫码 -> 关窗口 -> 重开面板 -> 免扫码进入（AC6）
+- 可选：申请代码签名证书，消除其他设备首次运行时的 SmartScreen 提示
+- 若不想公开 .dsh / .trellis/workspace 等脚手架与会话日志，加进 .gitignore 后 git rm --cached
