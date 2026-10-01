@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:;"
+    />
+    <title>抖音账号面板</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">抖</span>
+        <div>
+          <h1>抖音账号面板</h1>
+          <p class="brand-sub">每个账号各自保持登录，点一下直达，不用再切换</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button id="btn-data-dir" class="ghost" type="button">数据目录</button>
+        <button id="btn-uninstall" class="ghost danger" type="button">卸载</button>
+      </div>
+    </header>
+
+    <div id="banner" class="banner hidden" role="alert">
+      <span id="banner-text"></span>
+      <button id="banner-action" class="link hidden" type="button">手动指定浏览器</button>
+    </div>
+
+    <main>
+      <div class="toolbar">
+        <h2>我的账号</h2>
+        <button id="btn-add" class="primary" type="button">+ 添加账号</button>
+      </div>
+
+      <div id="grid" class="grid"></div>
+
+      <div id="empty" class="empty hidden">
+        <p class="empty-title">还没有账号</p>
+        <p class="empty-hint">
+          点「添加账号」，输入一个你能认出来的名字（比如「主号」），<br />
+          浏览器会打开抖音登录页，扫码登录一次就行。<br />
+          之后登录状态会一直保留，不用再扫。
+        </p>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <span id="browser-line" class="muted"></span>
+      <span id="hub-line" class="muted"></span>
+    </footer>
+
+    <div id="overlay" class="overlay hidden">
+      <div class="dialog" role="dialog" aria-modal="true">
+        <h3 id="dialog-title"></h3>
+        <div id="dialog-body" class="dialog-body"></div>
+        <div class="dialog-actions">
+          <button id="dialog-cancel" class="ghost" type="button">取消</button>
+          <button id="dialog-ok" class="primary" type="button">确定</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script type="module" src="./renderer.js"></script>
+  </body>
+</html>

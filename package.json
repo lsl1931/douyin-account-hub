@@ -1,0 +1,62 @@
+{
+  "name": "douyin-account-hub",
+  "productName": "DouyinAccountHub",
+  "version": "0.1.0",
+  "private": true,
+  "description": "抖音多账号入口面板 —— 4 个账号各自独立持久的登录态，点一下直达对应账号",
+  "main": "dist/main/index.js",
+  "scripts": {
+    "icon": "python scripts/make-icon.py build",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.renderer.json && node scripts/copy-assets.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.renderer.json --noEmit",
+    "test": "npm run build && node --test \"dist/test/*.test.js\"",
+    "verify:persistence": "node scripts/verify-profile-persistence.mjs",
+    "deploy": "node scripts/deploy.mjs",
+    "shortcut": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/create-shortcut.ps1 -HubRoot \"%LOCALAPPDATA%\\DouyinAccountHub\" -ShortcutName \"抖音账号面板\" -Description \"抖音多账号入口面板\"",
+    "pack": "npm run build && node scripts/pack.mjs",
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3",
+    "typescript": "^5.9.0"
+  },
+  "build": {
+    "appId": "com.sqdx66.douyinaccounthub",
+    "productName": "DouyinAccountHub",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "dist/main/index.js"
+    },
+    "npmRebuild": false,
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "抖音账号面板",
+      "uninstallDisplayName": "抖音账号面板",
+      "artifactName": "DouyinAccountHub-Setup-${version}.exe",
+      "include": "build/installer.nsh",
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}
